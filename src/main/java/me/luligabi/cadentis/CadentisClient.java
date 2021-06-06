@@ -12,9 +12,9 @@ import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class CadentisClient implements ClientModInitializer {
+
     @Override
     public void onInitializeClient() {
-
         lessBrightnessKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.cadentis.less_brightness",
                 InputUtil.Type.KEYSYM,
@@ -30,15 +30,21 @@ public class CadentisClient implements ClientModInitializer {
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while(lessBrightnessKeyBinding.wasPressed()) {
-                client.options.gamma -= 100;
-                client.player.sendMessage(new LiteralText("" + client.options.gamma), false);
+            while (lessBrightnessKeyBinding.wasPressed()) {
+                if(client.options.gamma > -150) {
+                    client.options.gamma -= 10;
+                    client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
+                }
             }
-            while(moreBrightnessKeyBinding.wasPressed()) {
-                client.options.gamma += 100;
-                client.player.sendMessage(new LiteralText("" + client.options.gamma), false);
+            while (moreBrightnessKeyBinding.wasPressed()) {
+                if(client.options.gamma < 150) {
+                    client.options.gamma += 10;
+                    client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
+                }
             }
         });
     }
+
     private static KeyBinding lessBrightnessKeyBinding;
     private static KeyBinding moreBrightnessKeyBinding;
+}
