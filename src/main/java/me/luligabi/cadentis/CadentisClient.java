@@ -12,11 +12,17 @@ import net.minecraft.text.LiteralText;
 @Environment(EnvType.CLIENT)
 public class CadentisClient implements ClientModInitializer {
 
+    public static boolean enabled;
+
     @Override
     public void onInitializeClient() {
         KeyBindingRegistry.init();
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while(KeyBindingRegistry.enableKeyBinding.wasPressed()) {
+                enabled = !enabled;
+            }
+
             while(KeyBindingRegistry.lessBrightnessKeyBinding.wasPressed()) {
                 if(client.options.gamma > -150) {
                     client.options.gamma -= 10;
@@ -24,6 +30,7 @@ public class CadentisClient implements ClientModInitializer {
                     client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
                 }
             }
+
             while(KeyBindingRegistry.moreBrightnessKeyBinding.wasPressed()) {
                 if(client.options.gamma < 150) {
                     client.options.gamma += 10;

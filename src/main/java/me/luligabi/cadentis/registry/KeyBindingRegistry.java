@@ -8,6 +8,13 @@ import org.lwjgl.glfw.GLFW;
 public class KeyBindingRegistry {
 
     public static void init() {
+        enableKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.cadentis.enable",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_C,
+                "category.cadentis.keys"
+        ));
+
         lessBrightnessKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.cadentis.less_brightness",
                 InputUtil.Type.KEYSYM,
@@ -22,7 +29,7 @@ public class KeyBindingRegistry {
                 "category.cadentis.keys"
         ));
     }
-
+    public static KeyBinding enableKeyBinding;
     public static KeyBinding lessBrightnessKeyBinding;
     public static KeyBinding moreBrightnessKeyBinding;
 }
