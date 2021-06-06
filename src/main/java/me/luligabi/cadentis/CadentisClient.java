@@ -26,7 +26,27 @@ public class CadentisClient implements ClientModInitializer {
 
             while(KeyBindingRegistry.lessBrightnessKeyBinding.wasPressed()) {
                 if(enabled && client.options.gamma > -150) {
-                    client.options.gamma -= 10;
+                    switch((int) client.options.gamma) {
+                        case 0: case 1:
+                            client.options.gamma = -25;
+                            break;
+                        case -25:
+                            client.options.gamma = -75;
+                            break;
+                        case -75:
+                            client.options.gamma = -150;
+                            break;
+                        case 25:
+                            client.options.gamma = 0;
+                            break;
+                        case 75:
+                            client.options.gamma = 25;
+                            break;
+                        case 150:
+                            client.options.gamma = 75;
+                            break;
+                    }
+                    //if(client.options.gamma < -150) client.options.gamma = -150;
                     client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
                     client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
                 }
@@ -34,7 +54,27 @@ public class CadentisClient implements ClientModInitializer {
 
             while(KeyBindingRegistry.moreBrightnessKeyBinding.wasPressed()) {
                 if(enabled && client.options.gamma < 150) {
-                    client.options.gamma += 10;
+                    switch((int) client.options.gamma) {
+                        case 0: case 1:
+                            client.options.gamma = 25;
+                            break;
+                        case 25:
+                            client.options.gamma = 75;
+                            break;
+                        case 75:
+                            client.options.gamma = 150;
+                            break;
+                        case -150:
+                            client.options.gamma = -75;
+                            break;
+                        case -75:
+                            client.options.gamma = -25;
+                            break;
+                        case -25:
+                            client.options.gamma = 0;
+                            break;
+                    }
+                    //if(client.options.gamma > 150) client.options.gamma = 150;
                     client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
                     client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
                 }

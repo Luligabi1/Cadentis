@@ -11,7 +11,7 @@ public class KeyBindingRegistry {
         enableKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.cadentis.enable",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_C,
+                GLFW.GLFW_KEY_K,
                 "category.cadentis.keys"
         ));
 
