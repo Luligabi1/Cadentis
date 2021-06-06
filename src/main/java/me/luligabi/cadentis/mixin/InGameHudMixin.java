@@ -5,10 +5,14 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.text.DecimalFormat;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
@@ -16,10 +20,35 @@ public class InGameHudMixin {
     @Inject(method = "render",
             at = @At("RETURN"),
             cancellable = true)
-    public void render(MatrixStack matrixStack, float tickDelta, CallbackInfo callbackInfo) {
+    public void cadentis_render(MatrixStack matrixStack, float tickDelta, CallbackInfo callbackInfo) {
         if(CadentisClient.enabled) {
-            MinecraftClient.getInstance().textRenderer.draw(matrixStack, new LiteralText("Gamma: " + MinecraftClient.getInstance().options.gamma), MinecraftClient.getInstance().getWindow().getScaledWidth()-70, 0, 0x0);
+            MinecraftClient client = MinecraftClient.getInstance();
+            DecimalFormat format = new DecimalFormat("0.#");
+            int gamma = (int) client.options.gamma;
+            int xOffset = gamma > 0 ? 108 : 115;
+            client.textRenderer.draw(matrixStack,
+                    new TranslatableText("message.cadentis.brightness", format.format(gamma*10L)).append(new LiteralText("%")).formatted(getBrightnessColor(gamma), Formatting.BOLD),
+                    client.getWindow().getScaledWidth()-xOffset, 2, 0x0);
         }
         callbackInfo.cancel();
+    }
+
+    private Formatting getBrightnessColor(int brightness) {
+        switch(brightness) {
+            case 25:
+                return Formatting.GREEN;
+            case 75:
+                return Formatting.YELLOW;
+            case 150:
+                return Formatting.GOLD;
+            case -25:
+                return Formatting.GRAY;
+            case -75:
+                return Formatting.DARK_GRAY;
+            case -150:
+                return Formatting.BLACK;
+            default:
+                return Formatting.WHITE;
+        }
     }
 }
