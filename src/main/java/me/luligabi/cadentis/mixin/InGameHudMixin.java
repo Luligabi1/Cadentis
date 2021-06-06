@@ -1,5 +1,6 @@
 package me.luligabi.cadentis.mixin;
 
+import me.luligabi.cadentis.CadentisClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -16,7 +17,9 @@ public class InGameHudMixin {
             at = @At("RETURN"),
             cancellable = true)
     public void render(MatrixStack matrixStack, float tickDelta, CallbackInfo callbackInfo) {
-        MinecraftClient.getInstance().textRenderer.draw(matrixStack, new LiteralText("Gamma: " + MinecraftClient.getInstance().options.gamma), 10, 0, 0x1);
+        if(CadentisClient.enabled) {
+            MinecraftClient.getInstance().textRenderer.draw(matrixStack, new LiteralText("Gamma: " + MinecraftClient.getInstance().options.gamma), MinecraftClient.getInstance().getWindow().getScaledWidth()-70, 0, 0x0);
+        }
         callbackInfo.cancel();
     }
 }

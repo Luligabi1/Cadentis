@@ -12,7 +12,7 @@ import net.minecraft.text.LiteralText;
 @Environment(EnvType.CLIENT)
 public class CadentisClient implements ClientModInitializer {
 
-    public static boolean enabled;
+    public static boolean enabled = false;
 
     @Override
     public void onInitializeClient() {
@@ -21,10 +21,11 @@ public class CadentisClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while(KeyBindingRegistry.enableKeyBinding.wasPressed()) {
                 enabled = !enabled;
+                client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
             }
 
             while(KeyBindingRegistry.lessBrightnessKeyBinding.wasPressed()) {
-                if(client.options.gamma > -150) {
+                if(enabled && client.options.gamma > -150) {
                     client.options.gamma -= 10;
                     client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
                     client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
@@ -32,7 +33,7 @@ public class CadentisClient implements ClientModInitializer {
             }
 
             while(KeyBindingRegistry.moreBrightnessKeyBinding.wasPressed()) {
-                if(client.options.gamma < 150) {
+                if(enabled && client.options.gamma < 150) {
                     client.options.gamma += 10;
                     client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
                     client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
