@@ -15,6 +15,7 @@ public class KeyBindingRegistry {
                 "category.cadentis.keys"
         ));
 
+
         lessBrightnessKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.cadentis.less_brightness",
                 InputUtil.Type.KEYSYM,
@@ -28,8 +29,26 @@ public class KeyBindingRegistry {
                 GLFW.GLFW_KEY_RIGHT,
                 "category.cadentis.keys"
         ));
+
+
+        minBrightnessKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.cadentis.min_brightness",
+                InputUtil.Type.KEYSYM,
+                InputUtil.UNKNOWN_KEY.getCode(),
+                "category.cadentis.keys"
+        ));
+
+        maxBrightnessKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.cadentis.max_brightness",
+                InputUtil.Type.KEYSYM,
+                InputUtil.UNKNOWN_KEY.getCode(),
+                "category.cadentis.keys"
+        ));
     }
+
     public static KeyBinding enableKeyBinding;
     public static KeyBinding lessBrightnessKeyBinding;
     public static KeyBinding moreBrightnessKeyBinding;
+    public static KeyBinding minBrightnessKeyBinding;
+    public static KeyBinding maxBrightnessKeyBinding;
 }

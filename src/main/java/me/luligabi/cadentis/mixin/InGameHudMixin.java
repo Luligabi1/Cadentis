@@ -1,6 +1,7 @@
 package me.luligabi.cadentis.mixin;
 
 import me.luligabi.cadentis.CadentisClient;
+import me.luligabi.cadentis.event.KeyBindingEventListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -25,8 +26,8 @@ public class InGameHudMixin {
     public void cadentis_render(MatrixStack matrixStack, float tickDelta, CallbackInfo callbackInfo) {
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if(CadentisClient.enabled) {
-            client.options.gamma = CadentisClient.gammaState;
+        if(KeyBindingEventListener.enabled) {
+            client.options.gamma = KeyBindingEventListener.gammaState;
             DecimalFormat format = new DecimalFormat("0.#");
             int gamma = (int) client.options.gamma;
             int xOffset;
