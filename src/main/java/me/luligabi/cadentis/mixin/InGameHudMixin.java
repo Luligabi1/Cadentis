@@ -25,10 +25,27 @@ public class InGameHudMixin {
             MinecraftClient client = MinecraftClient.getInstance();
             DecimalFormat format = new DecimalFormat("0.#");
             int gamma = (int) client.options.gamma;
-            int xOffset = gamma > 0 ? 108 : 115;
+            int xOffset;
+            switch(gamma) { //TODO: Make xOffset configurable
+                case 25: case 75:
+                    xOffset = 102;
+                    break;
+                case 150:
+                    xOffset = 108;
+                    break;
+                case -25: case -75:
+                    xOffset = 109;
+                    break;
+                case -150:
+                    xOffset = 115;
+                    break;
+                default:
+                    xOffset = 91;
+                    break;
+            }
             client.textRenderer.draw(matrixStack,
                     new TranslatableText("message.cadentis.brightness", format.format(gamma*10L)).append(new LiteralText("%")).formatted(getBrightnessColor(gamma), Formatting.BOLD),
-                    client.getWindow().getScaledWidth()-xOffset, 2, 0x0);
+                    client.getWindow().getScaledWidth()-xOffset, 2, 0x0); //TODO: Make yOffset configurable
         }
         callbackInfo.cancel();
     }
