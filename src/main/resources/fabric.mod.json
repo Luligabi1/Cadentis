@@ -3,13 +3,14 @@
   "id": "cadentis",
   "version": "${version}",
   "name": "Cadentis",
-  "description": "dummy",
+  "description": "Control your in-game brightness with the press of a button!",
   "authors": [
     "Luligabi"
   ],
   "contact": {
-    "website": "dummy",
-    "repo": "dummy"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/cadentis",
+    "repo": "https://github.com/Luligabi1/Cadentis",
+    "issues": "https://github.com/Luligabi1/Cadentis/issues"
   },
   "license": "Apache-2.0",
   "icon": "assets/cadentis/icon.png",
