@@ -1,3 +1,13 @@
 {
-  "message.cadentis.brightness": "Brightness: %s"
+  "message.cadentis.brightness": "Brightness: %s",
+
+  "key.cadentis.enable": "Enable/Disable Cadentis",
+
+  "key.cadentis.less_brightness": "Reduce Brightness",
+  "key.cadentis.more_brightness": "Increase Brightness",
+
+  "key.cadentis.min_brightness": "Min. Brightness",
+  "key.cadentis.max_brightness": "Max. Brightness",
+
+  "category.cadentis.keys": "Cadentis"
 }

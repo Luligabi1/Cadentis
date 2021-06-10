@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-public class CadentisClient implements ClientModInitializer {
+public class Cadentis implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {

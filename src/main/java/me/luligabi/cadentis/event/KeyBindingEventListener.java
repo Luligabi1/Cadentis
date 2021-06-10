@@ -4,7 +4,6 @@ import me.luligabi.cadentis.registry.KeyBindingRegistry;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.LiteralText;
 
 public class KeyBindingEventListener {
 
@@ -42,7 +41,6 @@ public class KeyBindingEventListener {
                 }
                 client.options.gamma = gammaState;
                 client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
-                client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
             }
 
             while(KeyBindingRegistry.moreBrightnessKeyBinding.wasPressed()) {
@@ -70,7 +68,6 @@ public class KeyBindingEventListener {
                 }
                 client.options.gamma = gammaState;
                 client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
-                client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
             }
 
             while(KeyBindingRegistry.minBrightnessKeyBinding.wasPressed()) {

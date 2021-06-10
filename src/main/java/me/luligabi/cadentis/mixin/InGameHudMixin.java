@@ -1,6 +1,5 @@
 package me.luligabi.cadentis.mixin;
 
-import me.luligabi.cadentis.CadentisClient;
 import me.luligabi.cadentis.event.KeyBindingEventListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;

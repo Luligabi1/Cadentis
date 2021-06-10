@@ -16,7 +16,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.luligabi.cadentis.CadentisClient"
+      "me.luligabi.cadentis.Cadentis"
     ]
   },
   "mixins": [
