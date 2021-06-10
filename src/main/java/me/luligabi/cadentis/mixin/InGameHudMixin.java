@@ -17,12 +17,16 @@ import java.text.DecimalFormat;
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
 
+    boolean resetGammaAfterToggleOff = true;
+
     @Inject(method = "render",
             at = @At("RETURN"),
             cancellable = true)
     public void cadentis_render(MatrixStack matrixStack, float tickDelta, CallbackInfo callbackInfo) {
+        MinecraftClient client = MinecraftClient.getInstance();
+
         if(CadentisClient.enabled) {
-            MinecraftClient client = MinecraftClient.getInstance();
+            client.options.gamma = CadentisClient.gammaState;
             DecimalFormat format = new DecimalFormat("0.#");
             int gamma = (int) client.options.gamma;
             int xOffset;
@@ -43,9 +47,16 @@ public class InGameHudMixin {
                     xOffset = 91;
                     break;
             }
+            resetGammaAfterToggleOff = true;
             client.textRenderer.draw(matrixStack,
                     new TranslatableText("message.cadentis.brightness", format.format(gamma*10L)).append(new LiteralText("%")).formatted(getBrightnessColor(gamma), Formatting.BOLD),
                     client.getWindow().getScaledWidth()-xOffset, 2, 0x0); //TODO: Make yOffset configurable
+        } else {
+            if(resetGammaAfterToggleOff) {
+                client.options.gamma = 1;
+                System.out.println(client.options.gamma);
+                resetGammaAfterToggleOff = false;
+            }
         }
         callbackInfo.cancel();
     }

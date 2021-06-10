@@ -13,6 +13,7 @@ import net.minecraft.text.LiteralText;
 public class CadentisClient implements ClientModInitializer {
 
     public static boolean enabled = false;
+    public static double gammaState = 0;
 
     @Override
     public void onInitializeClient() {
@@ -23,29 +24,29 @@ public class CadentisClient implements ClientModInitializer {
                 enabled = !enabled;
                 client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
             }
-
             while(KeyBindingRegistry.lessBrightnessKeyBinding.wasPressed()) {
                 if(enabled) {
                     switch((int) client.options.gamma) {
                         case 0: case 1:
-                            client.options.gamma = -25;
+                            gammaState = -25;
                             break;
                         case -25:
-                            client.options.gamma = -75;
+                            gammaState = -75;
                             break;
                         case -75:
-                            client.options.gamma = -150;
+                            gammaState = -150;
                             break;
                         case 25:
-                            client.options.gamma = 0;
+                            gammaState = 0;
                             break;
                         case 75:
-                            client.options.gamma = 25;
+                            gammaState = 25;
                             break;
                         case 150:
-                            client.options.gamma = 75;
+                            gammaState = 75;
                             break;
                     }
+                    client.options.gamma = gammaState;
                     client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
                     client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
                 }
@@ -55,24 +56,25 @@ public class CadentisClient implements ClientModInitializer {
                 if(enabled) {
                     switch((int) client.options.gamma) {
                         case 0: case 1:
-                            client.options.gamma = 25;
+                            gammaState = 25;
                             break;
                         case 25:
-                            client.options.gamma = 75;
+                            gammaState = 75;
                             break;
                         case 75:
-                            client.options.gamma = 150;
+                            gammaState = 150;
                             break;
                         case -150:
-                            client.options.gamma = -75;
+                            gammaState = -75;
                             break;
                         case -75:
-                            client.options.gamma = -25;
+                            gammaState = -25;
                             break;
                         case -25:
-                            client.options.gamma = 0;
+                            gammaState = 0;
                             break;
                     }
+                    client.options.gamma = gammaState;
                     client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1f));
                     client.player.sendMessage(new LiteralText(client.options.gamma + ""), false);
                 }
