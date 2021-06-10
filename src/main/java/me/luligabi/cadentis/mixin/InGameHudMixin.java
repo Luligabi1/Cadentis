@@ -54,7 +54,6 @@ public class InGameHudMixin {
         } else {
             if(resetGammaAfterToggleOff) {
                 client.options.gamma = 1;
-                System.out.println(client.options.gamma);
                 resetGammaAfterToggleOff = false;
             }
         }
